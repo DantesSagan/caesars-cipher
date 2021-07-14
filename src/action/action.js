@@ -80,24 +80,33 @@ class Action extends React.Component {
           const isFind = alphabet.findIndex((c) => c == charac);
           accumulator += alphabet[isFind + 13] || alphabet[isFind - 13];
         }
-        console.log(accumulator);
+        console.log();
       }
       return accumulator;
     };
     return (
       <div>
-        <input
-          style={{ width: '500px' }}
-          placeholder={'Enter text'}
-          onChange={(event) => {
-            this.updatedMarkdown(event.target.value);
-          }}
-        ></input>
         <div
-          dangerouslySetInnerHTML={{
-            __html: rot13(this.state.markdown),
-          }}
-        ></div>
+          className='container lg-auto max-w-md mx-auto rounded-xl shadow-md overflow-hidden md:max-w-2xl my-80 ml-24 p-4'
+          style={{ float: 'left',backgroundColor: "green"}}
+        >
+          <textarea
+            style={{ width:"100%",maxWidth: "650px" }}
+            placeholder={'Enter text'}
+            onChange={(event) => {
+              this.updatedMarkdown(event.target.value);
+            }}
+          ></textarea>
+        </div>
+        <div className='container lg-auto max-w-md mx-auto bg-transparent rounded-xl shadow-md overflow-hidden md:max-w-2xl my-80 mr-24 d-flex p-4 '
+        style={{ float: 'right', backgroundColor: "red",fontStyle:"italic", color: "whitesmoke"}}>
+          <div
+            style={{ width: '650px' }}
+            dangerouslySetInnerHTML={{
+              __html: rot13(this.state.markdown),
+            }}
+          ></div>
+        </div>
       </div>
     );
   }
