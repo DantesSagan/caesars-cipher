@@ -1,4 +1,5 @@
 import React from 'react';
+import Counter from './counter';
 
 const alphabet = [
   'A',
@@ -54,6 +55,38 @@ const alphabet = [
   'y',
   'z',
 ];
+const russianUpper = [
+  'A',
+  'Б',
+  'В',
+  'Г',
+  'Д',
+  'Е',
+  'Ё',
+  'Ж',
+  'З',
+  'К',
+  'Л',
+  'М',
+  'Н',
+  'О',
+  'П',
+  'Р',
+  'С',
+  'Т',
+  'У',
+  'Ф',
+  'Х',
+  'Ц',
+  'Ч',
+  'Ш',
+  'Щ',
+  'Ъ',
+  'Ь',
+  'Э',
+  'Ю',
+  'Я',
+];
 
 /* eslint-disable eqeqeq */
 class Action extends React.Component {
@@ -61,11 +94,13 @@ class Action extends React.Component {
     super(props);
     this.state = {
       markdown: alphabet,
+      randomIndex: '',
     };
   }
   updatedMarkdown = function (markdown) {
     this.setState({
       markdown,
+      randomIndex: Math.floor(Math.random() * 15),
     });
   };
   render() {
@@ -85,23 +120,36 @@ class Action extends React.Component {
       return accumulator;
     };
     return (
-      <div>
+      <div
+        className='justify-items-center grid grid-col-3 gap-4'
+        style={{ marginTop: '350px' }}
+      >
         <div
-          className='container lg-auto max-w-md mx-auto rounded-xl shadow-md overflow-hidden md:max-w-2xl my-80 ml-24 p-4'
-          style={{ float: 'left',backgroundColor: "green"}}
+          className=' rounded-xl shadow-md overflow-hidden p-4'
+          style={{ float: 'left', backgroundColor: 'green' }}
         >
           <textarea
-            style={{ width:"100%",maxWidth: "650px" }}
+            style={{ width: '350px' }}
             placeholder={'Enter text'}
             onChange={(event) => {
               this.updatedMarkdown(event.target.value);
             }}
           ></textarea>
         </div>
-        <div className='container lg-auto max-w-md mx-auto bg-transparent rounded-xl shadow-md overflow-hidden md:max-w-2xl my-80 mr-24 d-flex p-4 '
-        style={{ float: 'right', backgroundColor: "red",fontStyle:"italic", color: "whitesmoke"}}>
+        <Counter />
+        <div
+          className='bg-transparent rounded-xl shadow-md p-4'
+          style={{
+            float: 'right',
+            backgroundColor: 'red',
+            fontStyle: 'italic',
+            color: 'whitesmoke',
+          }}
+        >
           <div
-            style={{ width: '650px' }}
+            contentEditable='true'
+            placeholder={'You output'}
+            style={{ width: '350px' }}
             dangerouslySetInnerHTML={{
               __html: rot13(this.state.markdown),
             }}

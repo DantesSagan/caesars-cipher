@@ -4,5 +4,5 @@ import Action from './action/action';
 export default function App() {
   return (
       <Action />
-  );
+    );
 }
